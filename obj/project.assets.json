@@ -470,23 +470,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\chall\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\weizm\\.nuget\\packages\\": {},
+    "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chall\\source\\repos\\FarmerMarket\\FarmerMarket.csproj",
+      "projectUniqueName": "E:\\Desktop\\Assignment1\\FarmerMarket.csproj",
       "projectName": "FarmerMarket",
-      "projectPath": "C:\\Users\\chall\\source\\repos\\FarmerMarket\\FarmerMarket.csproj",
-      "packagesPath": "C:\\Users\\chall\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chall\\source\\repos\\FarmerMarket\\obj\\",
+      "projectPath": "E:\\Desktop\\Assignment1\\FarmerMarket.csproj",
+      "packagesPath": "C:\\Users\\weizm\\.nuget\\packages\\",
+      "outputPath": "E:\\Desktop\\Assignment1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\chall\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\weizm\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -538,7 +538,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace FarmerMarket
         {
             try//Exception Handling
             {
-                string connectionString = "Data Source=IT\\SQLEXPRESS;Initial Catalog=UserDB;Integrated Security=True";
+                string connectionString = "Data Source=Wei;Initial Catalog=userDB;Integrated Security=True";
                 con = new SqlConnection(connectionString);
                 con.Open();
                 MessageBox.Show("Connection Established Properly");
@@ -129,5 +130,25 @@ namespace FarmerMarket
                 MessageBox.Show(ex.Message);
             }
         }
-    }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                con.Open();
+                string Query = "Select * from ProductsInventory";
+                SqlCommand cmd = new SqlCommand(Query, con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dataGrid.ItemsSource = dt.AsDataView();
+                DataContext = da;
+                con.Close();
+            }
+            catch (SqlException ex)
+            {
+            }
+        }
+    } 
 }
+

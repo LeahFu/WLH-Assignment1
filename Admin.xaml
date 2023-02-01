@@ -5,17 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmerMarket"
         mc:Ignorable="d"
-        Title="Admin" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="ProductID" HorizontalAlignment="Left" Margin="277,57,0,0" TextWrapping="Wrap" Text="ProductID" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="ProductName" HorizontalAlignment="Left" Margin="277,107,0,0" TextWrapping="Wrap" Text="ProductName" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Amount" HorizontalAlignment="Left" Margin="277,160,0,0" TextWrapping="Wrap" Text="Amount" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="Price" HorizontalAlignment="Left" Margin="277,217,0,0" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="Connection" Content="Connection" HorizontalAlignment="Left" Margin="473,60,0,0" VerticalAlignment="Top" Height="38" Width="66" Click="Connection_Click"/>
-        <Button x:Name="Insert" Content="Insert" HorizontalAlignment="Left" Margin="473,116,0,0" VerticalAlignment="Top" Height="40" Width="66" Click="Insert_Click" />
-        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="473,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.817,-0.385" Width="66" Height="39" Click="Update_Click" />
-        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="473,236,0,0" VerticalAlignment="Top" Width="66" Height="41" Click="Delete_Click" />
-        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="473,301,0,0" VerticalAlignment="Top" Width="66" Height="47" Click="Search_Click" />
+        Title="Admin" Height="534" Width="896">
+    <Grid Margin="28,22,28,65">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170*"/>
+            <ColumnDefinition Width="147*"/>
+            <ColumnDefinition Width="514*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="ProductID" HorizontalAlignment="Left" Margin="105,57,0,0" TextWrapping="Wrap" Text="ProductID" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+        <TextBox x:Name="ProductName" HorizontalAlignment="Left" Margin="105,107,0,0" TextWrapping="Wrap" Text="ProductName" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+        <TextBox x:Name="Amount" HorizontalAlignment="Left" Margin="105,160,0,0" TextWrapping="Wrap" Text="Amount" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+        <TextBox x:Name="Price" HorizontalAlignment="Left" Margin="105,0,0,0" TextWrapping="Wrap" Text="Price" VerticalAlignment="Center" Width="120" Grid.Column="2"/>
+        <Button x:Name="Connection" Content="Connection" HorizontalAlignment="Left" Margin="301,60,0,0" VerticalAlignment="Top" Height="38" Width="66" Click="Connection_Click" Grid.Column="2"/>
+        <Button x:Name="Insert" Content="Insert" HorizontalAlignment="Left" Margin="301,116,0,0" VerticalAlignment="Top" Height="40" Width="66" Click="Insert_Click" Grid.Column="2" />
+        <Button x:Name="Update" Content="Update" HorizontalAlignment="Left" Margin="301,178,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.817,-0.385" Width="66" Height="39" Click="Update_Click" Grid.Column="2" />
+        <Button x:Name="Delete" Content="Delete" HorizontalAlignment="Left" Margin="301,236,0,0" VerticalAlignment="Top" Width="66" Height="41" Click="Delete_Click" Grid.Column="2" />
+        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="301,301,0,0" VerticalAlignment="Top" Width="66" Height="47" Click="Search_Click" Grid.Column="2" />
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,48,486,193" Grid.ColumnSpan="3"/>
+        <Button x:Name="viewdata" Grid.Column="2" Content="view data" HorizontalAlignment="Left" Margin="122,329,0,0" VerticalAlignment="Top" Height="64" Width="135" Click="Button_Click"/>
 
     </Grid>
 </Window>
