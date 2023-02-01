@@ -1,12 +1,18 @@
-﻿<Window x:Class="FarmerMarket.Window1"
+﻿<Window x:Class="FarmerMarket.Sales"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FarmerMarket"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Sales" Height="450" Width="800">
     <Grid>
-        
+        <TextBox x:Name="ProductID" HorizontalAlignment="Left" Margin="460,57,0,0" TextWrapping="Wrap" Text="ProductID" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.158,-0.444"/>
+        <TextBox x:Name="Amount" HorizontalAlignment="Left" Margin="626,57,0,0" TextWrapping="Wrap" Text="Amount" VerticalAlignment="Top" Width="120"/>
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,20,423,218"/>
+        <Button x:Name="Connection" Content="Connection" HorizontalAlignment="Left" Margin="477,167,0,0" VerticalAlignment="Top" Height="32" Width="93" Click="Connection_Click"/>
+        <Button x:Name="Calculate" Content="Calculate" HorizontalAlignment="Left" Margin="643,163,0,0" VerticalAlignment="Top" Height="54" Width="103" Click="Calculate_Click"/>
+        <Button x:Name="viewdata" Content="view data" HorizontalAlignment="Left" Margin="498,256,0,0" VerticalAlignment="Top" Height="54" Width="82" RenderTransformOrigin="-0.42,2.938" Click="viewdata_Click"/>
+
     </Grid>
 </Window>

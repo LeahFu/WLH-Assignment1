@@ -33,11 +33,11 @@ namespace FarmerMarket
             this.Close();
         }
 
-       /* private void Sales_Click(object sender, RoutedEventArgs e)
+       private void Sales_Click(object sender, RoutedEventArgs e)
         {
             Sales sales = new Sales();
             sales.Show();
             this.Close();
-        }*/
+        }
     }
 }
