@@ -28,3 +28,5 @@ C:\Users\chall\source\repos\FarmerMarket\obj\Debug\net6.0-windows\refint\FarmerM
 C:\Users\chall\source\repos\FarmerMarket\obj\Debug\net6.0-windows\FarmerMarket.pdb
 C:\Users\chall\source\repos\FarmerMarket\obj\Debug\net6.0-windows\FarmerMarket.genruntimeconfig.cache
 C:\Users\chall\source\repos\FarmerMarket\obj\Debug\net6.0-windows\ref\FarmerMarket.dll
+C:\Users\chall\source\repos\FarmerMarket\obj\Debug\net6.0-windows\Sales.g.cs
+C:\Users\chall\source\repos\FarmerMarket\obj\Debug\net6.0-windows\Sales.baml

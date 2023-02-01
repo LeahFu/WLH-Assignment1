@@ -92,18 +92,13 @@ namespace FarmerMarket
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
+            { 
                 con.Open();
-                string Query = "SELECT ProductName, Amount, Price from ProductsInventory where ProductID=@ProductID";
+                string Query = "DELETE ProductsInventory where ProductID=@ProductID";
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.Parameters.AddWithValue("@ProductID", int.Parse(ProductID.Text));
-                SqlDataReader sqlReader = cmd.ExecuteReader();
-                while (sqlReader.Read())
-                {
-                    ProductName.Text = (string)sqlReader.GetValue(0);
-                    Amount.Text = sqlReader.GetValue(1).ToString();
-                    Price.Text = (string)sqlReader.GetValue(2);
-                }
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Deleted Properly");
                 con.Close();
             }
             catch (SqlException ex)
@@ -117,11 +112,16 @@ namespace FarmerMarket
             try
             {
                 con.Open();
-                string Query = "DELETE ProductsInventory where ProductID=@ProductID";
+                string Query = "SELECT ProductName, Amount, Price from ProductsInventory where ProductID=@ProductID";
                 SqlCommand cmd = new SqlCommand(Query, con);
                 cmd.Parameters.AddWithValue("@ProductID", int.Parse(ProductID.Text));
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Deleted Properly");
+                SqlDataReader sqlReader = cmd.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    ProductName.Text = (string)sqlReader.GetValue(0);
+                    Amount.Text = sqlReader.GetValue(1).ToString();
+                    Price.Text = (string)sqlReader.GetValue(2);
+                }
                 con.Close();
             }
             catch (SqlException ex)
