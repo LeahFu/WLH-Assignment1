@@ -50,8 +50,9 @@ namespace FarmerMarket
             {
                 //Open the Database Connection
                 con.Open();
-                string query = "Update ProductsInventory set Amount= (Amount- @Amount)";
+                string query = "Update ProductsInventory set Amount= (Amount- @Amount) Where ProductID=@ProductID ";
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@ProductID", int.Parse(ProductID.Text));
                 cmd.Parameters.AddWithValue("@Amount", double.Parse(Amount.Text));
                 //We now need to execute our Query
                 cmd.ExecuteNonQuery();
