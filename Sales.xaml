@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="Sales" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="ProductID" HorizontalAlignment="Left" Margin="460,57,0,0" TextWrapping="Wrap" Text="ProductID" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.158,-0.444"/>
-        <TextBox x:Name="Amount" HorizontalAlignment="Left" Margin="626,57,0,0" TextWrapping="Wrap" Text="Amount" VerticalAlignment="Top" Width="120"/>
-        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,20,423,218"/>
-        <Button x:Name="Connection" Content="Connection" HorizontalAlignment="Left" Margin="477,167,0,0" VerticalAlignment="Top" Height="32" Width="93" Click="Connection_Click"/>
-        <Button x:Name="Calculate" Content="Calculate" HorizontalAlignment="Left" Margin="643,163,0,0" VerticalAlignment="Top" Height="54" Width="103" Click="Calculate_Click"/>
-        <Button x:Name="viewdata" Content="view data" HorizontalAlignment="Left" Margin="498,256,0,0" VerticalAlignment="Top" Height="54" Width="82" RenderTransformOrigin="-0.42,2.938" Click="viewdata_Click"/>
-
+        <ComboBox x:Name="productComboBox" HorizontalAlignment="Left" Height="24" Margin="116,37,0,0" VerticalAlignment="Top" Width="210" ItemsSource="{Binding productNames}"/>
+        <Label Content="Product : " HorizontalAlignment="Left" Height="32" Margin="56,37,0,0" VerticalAlignment="Top" Width="78"/>
+        <Label Content="Amount(kg) :" HorizontalAlignment="Left" Height="32" Margin="53,143,0,0" VerticalAlignment="Top" Width="81"/>
+        <TextBox x:Name="AmountTextBox" HorizontalAlignment="Left" Height="32" Margin="155,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" RenderTransformOrigin="-0.413,0.623"/>
+        <TextBox x:Name="BillTextBox" HorizontalAlignment="Left" Height="274" Margin="452,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" IsEnabled="False"/>
+        <Button x:Name="CheckOut" Content="Comfirm" HorizontalAlignment="Left" Height="32" Margin="67,298,0,0" VerticalAlignment="Top" Width="102" Click="CheckOut_Click"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Height="32" Margin="285,298,0,0" VerticalAlignment="Top" Width="89" Click="Cancel_Click"/>
+        <Label Content="Order Details" HorizontalAlignment="Left" Height="24" Margin="489,28,0,0" VerticalAlignment="Top" Width="102"/>
+        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" Height="32" Margin="310,143,0,0" VerticalAlignment="Top" Width="90" Click="Add_Click"/>
     </Grid>
 </Window>

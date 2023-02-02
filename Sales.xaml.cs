@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -23,66 +24,135 @@ namespace FarmerMarket
     public partial class Sales : Window
     {
         SqlConnection con;
+        public string[] productNames { get; set; }
+        public string updateSqls { get; set; }
+        public double totalAll { get; set; }
+
         public Sales()
         {
+
             InitializeComponent();
+            string connectionString = "Data Source=Wei;Initial Catalog=userDB;Integrated Security=True";
+            con = new SqlConnection(connectionString);
+
+            productNames = GetProductData();
+            DataContext = this;
         }
 
-        private void Connection_Click(object sender, RoutedEventArgs e)
+        private string[] GetProductData()
         {
-            try//Exception Handling
+            con.Open();
+
+            string querySql = "select ProductName from ProductsInventory";
+            SqlCommand cmd = new SqlCommand(querySql, con);
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            ArrayList productNameList = new ArrayList();
+
+            int counter = 0;
+
+            while (sqlDataReader.Read())
             {
-                string connectionString = "Data Source=Wei;Initial Catalog=userDB;Integrated Security=True";
-                con = new SqlConnection(connectionString);
-                con.Open();
-                MessageBox.Show("Connection Established Properly");
-                con.Close();
+                //get rows
+                counter++;
+                productNameList.Add(sqlDataReader.GetValue(0).ToString());
             }
-            catch (SqlException ex)
+
+            string[] productNames = new string[counter];
+
+            for (int i = 0; i < productNameList.Count; i++)
             {
-                MessageBox.Show(ex.Message);
+                productNames[i] = (string)productNameList[i];
+
             }
+
+            con.Close();
+            return productNames;
         }
 
-        private void Calculate_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (this.productComboBox.SelectedIndex == -1)
             {
-                //Open the Database Connection
-                con.Open();
-                string query = "Update ProductsInventory set Amount= (Amount- @Amount) Where ProductID=@ProductID ";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@ProductID", int.Parse(ProductID.Text));
-                cmd.Parameters.AddWithValue("@Amount", double.Parse(Amount.Text));
-                //We now need to execute our Query
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Inserted Perfectly to the Database");
+                MessageBox.Show("please select product what you want.");
+                return;
+            }
+            if (this.AmountTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("please input the amount what you need.");
+                return;
+            }
+
+            string productName = (string)productComboBox.SelectedItem;
+            double amount = Convert.ToDouble(this.AmountTextBox.Text);
+            double price = 0;
+            double total = 0;
+
+            con.Open();
+            string querySql = "select ProductName, Amount, Price from ProductsInventory where ProductName=@ProductName";
+            SqlCommand cmd = new SqlCommand(querySql, con);
+            cmd.Parameters.AddWithValue("@ProductName", productName);
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            double amountInventory = 0;
+            while (sqlDataReader.Read())
+            {
+                amountInventory = Convert.ToDouble(sqlDataReader.GetValue(1).ToString());
+                price = Convert.ToDouble(sqlDataReader.GetValue(2).ToString());
+            }
+
+            if (amount > amountInventory)
+            {
+                MessageBox.Show("this product is out of stock, please reduce the amount.");
                 con.Close();
+                return;
             }
-            catch (SqlException ex)
+
+            updateSqls = updateSqls + "update ProductsInventory set Amount = Amount - " + this.AmountTextBox.Text + "where ProductName = '" + this.productComboBox.SelectedItem + "'; ";
+            total = Math.Round(amount * price,2);
+            if (this.BillTextBox.Text.Length == 0)
             {
-                MessageBox.Show(ex.Message);
+                this.BillTextBox.Text = productName +"   " + amount.ToString() + "     $" + total.ToString() + "\n";
+                totalAll = Math.Round(totalAll + total,2);
+                this.BillTextBox.Text = this.BillTextBox.Text + "Total price: " + totalAll;
             }
+            else
+            {
+                string tempStr = this.BillTextBox.Text;
+
+                tempStr = tempStr.Substring(0, tempStr.Length - (tempStr.Length - tempStr.LastIndexOf("\n")));
+                tempStr = tempStr + "\n";
+                tempStr = tempStr + productName +"    "+ amount.ToString() + "    $" + total.ToString() + "\n";
+                totalAll += total;
+
+                this.BillTextBox.Text = tempStr + "total price: " + "$" +totalAll;
+
+            }
+            this.productComboBox.SelectedIndex = -1;
+            this.AmountTextBox.Text = "";
+
+            con.Close();
         }
 
-        private void viewdata_Click(object sender, RoutedEventArgs e)
+        private void CheckOut_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                con.Open();
-                string Query = "Select * from ProductsInventory";
-                SqlCommand cmd = new SqlCommand(Query, con);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                dataGrid.ItemsSource = dt.AsDataView();
-                DataContext = da;
-                con.Close();
-            }
-            catch (SqlException ex)
-            {
-            }
-        
+            con.Open();
+            SqlCommand cmd = new SqlCommand(updateSqls, con);
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            updateSqls = "";
+            totalAll = 0;
+
+            MessageBox.Show(this.BillTextBox.Text);
+            this.BillTextBox.Clear();
+            con.Close();
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow MainWin = new MainWindow();
+            this.Close();
+            MainWin.Show();
         }
     }
 }
