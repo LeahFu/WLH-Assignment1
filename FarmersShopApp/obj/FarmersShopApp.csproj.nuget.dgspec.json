@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\FarmersShopApp\\FarmersShopApp.csproj": {}
+    "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\WLH-Assignment1\\FarmersShopApp\\FarmersShopApp.csproj": {}
   },
   "projects": {
-    "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\FarmersShopApp\\FarmersShopApp.csproj": {
+    "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\WLH-Assignment1\\FarmersShopApp\\FarmersShopApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\FarmersShopApp\\FarmersShopApp.csproj",
+        "projectUniqueName": "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\WLH-Assignment1\\FarmersShopApp\\FarmersShopApp.csproj",
         "projectName": "FarmersShopApp",
-        "projectPath": "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\FarmersShopApp\\FarmersShopApp.csproj",
+        "projectPath": "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\WLH-Assignment1\\FarmersShopApp\\FarmersShopApp.csproj",
         "packagesPath": "C:\\Users\\zhang\\.nuget\\packages\\",
-        "outputPath": "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\FarmersShopApp\\obj\\",
+        "outputPath": "D:\\vanier\\block4\\Application Development\\02-Assignment\\Assignment1\\WLH-Assignment1\\FarmersShopApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

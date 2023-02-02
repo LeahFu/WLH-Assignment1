@@ -7,18 +7,14 @@
         mc:Ignorable="d"
         Title="Sales" Height="450" Width="800">
     <Grid>
-        <Label Content="Farmer's Shop Product" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="239" FontSize="18" FontWeight="Bold" FontFamily="Arial Black"/>
-        <Label Content="Choose your product" HorizontalAlignment="Left" Margin="137,84,0,0" VerticalAlignment="Top" Width="141" FontSize="14"/>
-        <TextBox x:Name="UAmount" HorizontalAlignment="Left" Margin="350,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <Label Content="Anount(kg)" HorizontalAlignment="Left" Margin="350,110,0,0" VerticalAlignment="Top" Width="80" FontSize="14" RenderTransformOrigin="1.075,-0.034"/>
-        <Label x:Name="shoppingList" Content="Shopping Cart" HorizontalAlignment="Left" Margin="579,84,0,0" VerticalAlignment="Top" Width="98" FontSize="14"/>
-        <TextBox x:Name="Price_TOTAL" HorizontalAlignment="Left" Margin="658,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" FontSize="14" />
-        <Label Content="Total Amout" HorizontalAlignment="Left" Margin="565,332,0,0" VerticalAlignment="Top" Width="88" FontSize="14"/>
-        <DataGrid x:Name="productList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="108,118,493,174" HorizontalAlignment="Center"/>
-        <Button x:Name="add" Content="Add To Cart" HorizontalAlignment="Left" Margin="350,217,0,0" VerticalAlignment="Top" Width="82" />
-        <DataGrid x:Name="ShoppingList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="493,118,58,174" HorizontalAlignment="Center"/>
-        <Button x:Name="clear" Content="Clear" HorizontalAlignment="Left" Margin="350,245,0,0" VerticalAlignment="Top" Width="82" />
-        <Button x:Name="checkout" Content="CheckOut" HorizontalAlignment="Left" Margin="658,297,0,0" VerticalAlignment="Top" FontSize="14"/>
-
+        <ComboBox x:Name="productComboBox" HorizontalAlignment="Left" Height="24" Margin="145,71,0,0" VerticalAlignment="Top" Width="210" ItemsSource="{Binding productNames}"/>
+        <Label Content="Product : " HorizontalAlignment="Left" Height="32" Margin="67,67,0,0" VerticalAlignment="Top" Width="78" FontSize="14"/>
+        <Label Content="Amount(kg) :" HorizontalAlignment="Left" Height="32" Margin="69,143,0,0" VerticalAlignment="Top" Width="97" FontSize="14"/>
+        <TextBox x:Name="AmountTextBox" HorizontalAlignment="Left" Height="31" Margin="171,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" RenderTransformOrigin="-0.413,0.623" FontSize="14"/>
+        <TextBox x:Name="BillTextBox" HorizontalAlignment="Left" Height="274" Margin="452,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" IsEnabled="False" FontSize="14"/>
+        <Button x:Name="CheckOut" Content="Comfirm" HorizontalAlignment="Left" Height="32" Margin="94,240,0,0" VerticalAlignment="Top" Width="102" Click="CheckOut_Click" FontSize="14"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Height="32" Margin="250,240,0,0" VerticalAlignment="Top" Width="89" Click="Cancel_Click" FontSize="14"/>
+        <Label Content="Order Details" HorizontalAlignment="Left" Height="33" Margin="452,29,0,0" VerticalAlignment="Top" Width="113" FontSize="16"/>
+        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" Height="32" Margin="277,142,0,0" VerticalAlignment="Top" Width="78" Click="Add_Click"/>
     </Grid>
 </Window>

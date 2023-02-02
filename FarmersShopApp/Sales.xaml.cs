@@ -14,63 +14,142 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Collections;
 
 namespace FarmersShopApp
 {
-    /// <summary>
-    /// Interaction logic for Sales.xaml
-    /// </summary>
     public partial class Sales : Window
     {
-        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-98IF6CD;Initial Catalog=FamersProduct;Integrated Security=True;Pooling=False");
+        SqlConnection con;
+        public string[] productNames { get; set; }
+        public string updateSqls { get; set; }
+        public double totalAll { get; set; }
+
         public Sales()
         {
+
             InitializeComponent();
-            LoadProListGrid();
-            LoadShoppingListGrid();
+            string connectionString = "Data Source=DESKTOP-98IF6CD;Initial Catalog=FamersProduct;Integrated Security=True";
+            con = new SqlConnection(connectionString);
+
+            productNames = GetProductData();
+            DataContext = this;
         }
 
-       
-
-        private void LoadProListGrid()
+        private string[] GetProductData()
         {
-            SqlCommand cmd = new SqlCommand("select ProductName,Price from FarmersProduct", con);
-            DataTable dt = new DataTable();
             con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
+
+            string querySql = "select ProductName from FarmersProduct";
+            SqlCommand cmd = new SqlCommand(querySql, con);
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            ArrayList productNameList = new ArrayList();
+
+            int counter = 0;
+
+            while (sqlDataReader.Read())
+            {
+                //get rows
+                counter++;
+                productNameList.Add(sqlDataReader.GetValue(0).ToString());
+            }
+
+            string[] productNames = new string[counter];
+
+            for (int i = 0; i < productNameList.Count; i++)
+            {
+                productNames[i] = (string)productNameList[i];
+
+            }
+
             con.Close();
-            productList.ItemsSource = dt.DefaultView;
+            return productNames;
         }
 
-        private void LoadShoppingListGrid()
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("select ProductName,OrderAmout,TotalPrice from ShoppingList", con);
-            DataTable dt = new DataTable();
+            if (this.productComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("please select product what you want.");
+                return;
+            }
+            if (this.AmountTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("please input the amount what you need.");
+                return;
+            }
+
+            string productName = (string)productComboBox.SelectedItem;
+            double amount = Convert.ToDouble(this.AmountTextBox.Text);
+            double price = 0;
+            double total = 0;
+
             con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
+            string querySql = "select ProductName, Amount, Price from FarmersProduct where ProductName=@ProductName";
+            SqlCommand cmd = new SqlCommand(querySql, con);
+            cmd.Parameters.AddWithValue("@ProductName", productName);
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
+
+            double amountInventory = 0;
+            while (sqlDataReader.Read())
+            {
+                amountInventory = Convert.ToDouble(sqlDataReader.GetValue(1).ToString());
+                price = Convert.ToDouble(sqlDataReader.GetValue(2).ToString());
+            }
+
+            if (amount > amountInventory)
+            {
+                MessageBox.Show("this product is out of stock, please reduce the amount.");
+                con.Close();
+                return;
+            }
+
+            updateSqls = updateSqls + "update FarmersProduct set Amount = Amount - " + this.AmountTextBox.Text + "where ProductName = '" + this.productComboBox.SelectedItem + "'; ";
+            total = Math.Round(amount * price, 2);
+            if (this.BillTextBox.Text.Length == 0)
+            {
+                this.BillTextBox.Text = productName + "   " + amount.ToString() + "     $" + total.ToString() + "\n";
+                totalAll = Math.Round(totalAll + total, 2);
+                this.BillTextBox.Text = this.BillTextBox.Text + "Total price: " + totalAll;
+            }
+            else
+            {
+                string tempStr = this.BillTextBox.Text;
+
+                tempStr = tempStr.Substring(0, tempStr.Length - (tempStr.Length - tempStr.LastIndexOf("\n")));
+                tempStr = tempStr + "\n";
+                tempStr = tempStr + productName + "    " + amount.ToString() + "    $" + total.ToString() + "\n";
+                totalAll += total;
+
+                this.BillTextBox.Text = tempStr + "total price: " + "$" + totalAll;
+
+            }
+            this.productComboBox.SelectedIndex = -1;
+            this.AmountTextBox.Text = "";
+
             con.Close();
-            ShoppingList.ItemsSource = dt.DefaultView;
         }
 
-        //public void clearShoppingListData()
-        //{
-            
-        //    ProductName.Clear();
-        //    Amount.Clear();
-        //    Price.Clear();
-        //}
+        private void CheckOut_Click(object sender, RoutedEventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand(updateSqls, con);
+            SqlDataReader sqlDataReader = cmd.ExecuteReader();
 
-        //private void clear_Click(object sender, RoutedEventArgs e)
-        //{
-        //    clearShoppingListData();
-            
-        //}
+            updateSqls = "";
+            totalAll = 0;
 
-        //private void add_Click(object sender, RoutedEventArgs e)
-        //{
-           
-        //}
+            MessageBox.Show(this.BillTextBox.Text);
+            this.BillTextBox.Clear();
+            con.Close();
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow MainWin = new MainWindow();
+            this.Close();
+            MainWin.Show();
+        }
     }
 }
