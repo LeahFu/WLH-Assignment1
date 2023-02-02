@@ -1,0 +1,20 @@
+﻿<Window x:Class="FarmersShopApp.Sales"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FarmersShopApp"
+        mc:Ignorable="d"
+        Title="Sales" Height="450" Width="800">
+    <Grid>
+        <ComboBox x:Name="productComboBox" HorizontalAlignment="Left" Height="24" Margin="145,71,0,0" VerticalAlignment="Top" Width="210" ItemsSource="{Binding productNames}"/>
+        <Label Content="Product : " HorizontalAlignment="Left" Height="32" Margin="67,67,0,0" VerticalAlignment="Top" Width="78" FontSize="14"/>
+        <Label Content="Amount(kg) :" HorizontalAlignment="Left" Height="32" Margin="69,143,0,0" VerticalAlignment="Top" Width="97" FontSize="14"/>
+        <TextBox x:Name="AmountTextBox" HorizontalAlignment="Left" Height="31" Margin="171,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" RenderTransformOrigin="-0.413,0.623" FontSize="14"/>
+        <TextBox x:Name="BillTextBox" HorizontalAlignment="Left" Height="274" Margin="452,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" IsEnabled="False" FontSize="14"/>
+        <Button x:Name="CheckOut" Content="Comfirm" HorizontalAlignment="Left" Height="32" Margin="94,240,0,0" VerticalAlignment="Top" Width="102" Click="CheckOut_Click" FontSize="14"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Height="32" Margin="250,240,0,0" VerticalAlignment="Top" Width="89" Click="Cancel_Click" FontSize="14"/>
+        <Label Content="Order Details" HorizontalAlignment="Left" Height="33" Margin="452,29,0,0" VerticalAlignment="Top" Width="113" FontSize="16"/>
+        <Button x:Name="Add" Content="Add" HorizontalAlignment="Left" Height="32" Margin="277,142,0,0" VerticalAlignment="Top" Width="78" Click="Add_Click"/>
+    </Grid>
+</Window>
